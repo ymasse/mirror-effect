@@ -1,0 +1,74 @@
+<div class ="row">
+  <div class="col-xl-12">
+    <br>
+    <div class="therapy-panel">
+      <ul class="therapy">
+        <li *ngFor="let therapy of (therapyState | async).therapies; let i = index">
+          <div class="therapy-body clearfix">
+            <div class="row">
+              <div class="col-xl-3">
+                <input type="checkbox" class= "pf-checkbox" id="customCheck1">
+                <div class="header">
+                    <strong class="primary-font">{{ therapy.patient.first_name + " " + therapy.patient.last_name }} ({{ therapy.language }})</strong>
+                    <p><small class="text-muted"><i class="fa fa-user-md"></i> {{ 'Therapist' | translate }}:
+                    <span> {{ therapy.therapist.first_name + " " + therapy.therapist.last_name }} </span>
+                    <div>
+                      {{ 'Affected side' | translate }}:
+                      <span> {{ therapy.paralyzedSide | translate }}</span>
+                    </div>
+                    </small>  </p>
+                  </div>
+              </div>
+              <div class="col-xl-1">
+                  <h6>{{ 'Start' | translate}}</h6>
+                  <small>
+                    <p>{{ therapy.startDate | date:'yyyy-MM-dd' }}</p>
+                  </small>
+                </div>
+              <div class="col-xl-1">
+                <h6>{{ 'End' | translate}}</h6>
+                <small>
+                  <p>{{ therapy.endDate | date:'yyyy-MM-dd' }}</p>
+                </small>
+              </div>
+              <div class="col-xl-2">
+                <h6>{{ 'Last Session' | translate}}</h6>
+                <small>
+                  <p>{{ therapy.startDate | date:'yyyy-MM-dd' }}</p>
+                </small>
+              </div>
+              <div class="col-xl-3" *ngIf="!therapy.published">
+                  <i class="fa fa-ban text-danger" style="font-size:24px; vertical-align: middle;"></i>
+                  <small><span>{{'Not activated' | translate }}</span></small>
+              </div>
+              <div class="col-xl-3" *ngIf="therapy.published">
+                  <i class="fa fa-check-circle text-success" style="font-size:24px; vertical-align: middle;"></i>
+                  <small><span>{{'Activated' | translate }}</span></small>
+              </div>
+              <div class="col-xl-1">
+                  <!--<ngb-progressbar type="info" [value]="50"></ngb-progressbar>-->
+              </div>
+              <div class="col-xl-1">
+
+                  <div class="dropdown pull-right dropdown-kebab-pf">
+                      <button class="btn btn-primary btn-sm" (click)="onEditTherapy(therapy)" >
+                          <span class="fa  fa-edit" ></span>
+                      </button>
+                      <button class="btn btn-danger btn-sm" (click)="onDeleteTherapy(therapy)">
+                          <span class="fa fa-trash"></span>
+                      </button>
+                        <button class="btn btn-link" type="button" id="dropdownKebabRight9">
+                      <span class="fa fa-ellipsis-v"></span>
+                    </button>                
+                  </div>                  
+                </div>            
+            </div>
+
+            </div>
+          <hr>
+        </li>
+      </ul>  
+    </div>
+  </div>
+</div>
+

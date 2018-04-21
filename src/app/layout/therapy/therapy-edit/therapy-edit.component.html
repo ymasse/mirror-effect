@@ -1,0 +1,103 @@
+<div >
+    <form [formGroup]="therapyForm" class="therapy-form" (ngSubmit)="onSubmit()" novalidate>
+        <div class ="row">
+
+            <div class="col-xl-4">
+                <div class="row form-group validator">
+                    <div class="col-xl-12">
+                        <small class="center-block">{{ 'Patient' | translate }}</small>
+                        <select class="form-control" formControlName="patient">
+                            <option *ngFor="let l of (patientList | async).patients" [ngValue]="l">{{ l.fullName | translate }}</option>
+                        </select> 
+                    </div>
+                </div>   
+                <div class="row form-group validator">
+                    <div class="col-xl-12">
+                        <small class="center-block">{{ 'Therapist' | translate }}</small>
+                        <select class="form-control" formControlName="therapist">
+                            <option *ngFor="let l of (therapistList | async).therapists" [ngValue]="l">{{ l.fullName | translate }}</option>
+                        </select> 
+                    </div>
+                </div>   
+
+                <div class="row form-group validator">
+                    <div class="col-xl-6">
+                        <small class="center-block">{{ 'Language' | translate}}</small>
+                        <select class="form-control" formControlName="language">
+                            <option *ngFor="let l of languages" [ngValue]="l">{{ l.displayName | translate }}</option>
+                        </select>
+
+                    </div>
+                    <div class="col-xl-6">
+                            <small class="center-block">{{ 'Paralyzed Side' | translate}}</small>
+                            <select class="form-control" formControlName="paralyzedSide">
+                                <option *ngFor="let s of faceSides" [ngValue]="s">{{ s.displayName | translate }}</option>
+                            </select>
+    
+                        </div>
+                    </div>
+            </div>
+            <div class="col-xl-8">
+                <div class="row form-group validator">
+                        <div class="col-xl-3">
+                            <small class="center-block">{{ 'Starting date' | translate }} </small>
+                            <div class="input-group">
+                                <input class="form-control" placeholder="yyyy-mm-dd" name="dp" ngbDatepicker #d="ngbDatepicker">
+                                <div class="input-group-addon" (click)="d.toggle()" >
+                                    <span class="fa fa-calendar"></span>
+                                </div>
+                            </div>
+                        </div>
+                </div>
+                <div class="row form-group validator">
+                    <div class="col-xl-3">
+                            <small class="center-block">{{ 'Movement Duration' | translate }} </small>
+                            <input class="form-control validator" type="number" formControlName="movementDuration">
+                        
+                    </div>
+                    <div class="col-xl-3">
+                            <small class="center-block">{{ 'Movement Repetition' | translate }} </small>
+                            <input class="form-control validator" type="number" formControlName="movementRepetition">
+                        
+                    </div>      
+                    <div class="col-xl-3">
+                            <small class="center-block">{{ 'Delay between repetition' | translate }} </small>
+                            <input class="form-control validator" type="number" formControlName="delayBetweenMovementRepetition">
+                        
+                    </div>
+                    <div class="col-xl-3">
+                            <small class="center-block">{{ 'Daily Repetition' | translate }} </small>
+                            <input class="form-control validator" type="number" formControlName="dailyFrequency">
+                        
+                    </div>        
+                </div>
+          
+                <div class="row form-group validator">
+                    <div class="col-xl-12">
+                        <small class="center-block">{{ 'Notes' | translate }}</small>
+                        <textarea class="form-control" formControlName="notes"></textarea>    
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+
+        </div>
+        <div class="row exercise-list">
+                        <div class="col-xl-12 exercise-list">
+                <app-therapy-exercise-list [exercises]="(therapyState | async).availableExercises"></app-therapy-exercise-list>
+            </div>
+        </div>
+        <div class="row">
+
+        </div>
+        <div >
+            <div class="pull-right">
+                <button class="btn btn-default" (click)="onCancel()">{{ 'Cancel' | translate }}</button>&nbsp;&nbsp;
+                <button type="submit" class="btn btn-success" [disabled]="therapyForm.invalid">{{ submitButtonLabel | translate }}</button>
+            </div>
+        </div>
+    </form>
+
+</div>
+  

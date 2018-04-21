@@ -1,0 +1,132 @@
+<div class = "row">
+    <div class="col-xl-12">
+        <div class="pull-right">
+                <button class="btn btn-secondary btn-sm" (click)="onRefresh()">
+                
+                <span class="fa fa-retweet" ></span>
+                {{ 'Refresh' | translate }}
+            </button>
+            <button class="btn btn-success btn-sm" (click)="onAddExercise()">
+                
+                <span class="fa fa-fw fa-plus" ></span>
+                {{ 'Add New Exercise' | translate }}
+            </button>
+        </div>
+    </div>
+</div>
+
+<div class ="row">
+    <div class="col-xl-12">
+
+
+        <ngx-datatable class="bootstrap"
+        [rows]="(exerciseState | async).exercises"
+        [columnMode]="'force'"
+        [headerHeight]="50"
+        [footerHeight]="50"
+        [rowHeight]="'auto'"
+        [limit]="8"  >
+          <ngx-datatable-column 
+            name="{{ 'Description' | translate}}" 
+            prop="description" 
+            [width]="500"
+            [resizeable]="true"
+            [sortable]="true"
+            [draggable]="true"
+            [canAutoResize]="true">
+          </ngx-datatable-column>
+          <ngx-datatable-column 
+            name="{{ 'Language' | translate}}"
+            prop="language"
+            [width]="20"
+            [resizeable]="true"
+            [sortable]="true"
+            [draggable]="true"
+            [canAutoResize]="true">
+          </ngx-datatable-column>
+          <ngx-datatable-column 
+            name="{{ 'Username' | translate}}" 
+            prop="username"
+            [width]="30"
+            [resizeable]="true"
+            [sortable]="true"
+            [draggable]="true"
+            [canAutoResize]="true">
+          </ngx-datatable-column>
+          <ngx-datatable-column 
+            name="{{ 'Created at' | translate}}" 
+            prop="created_at"
+            [resizeable]="true"
+            [sortable]="true"
+            [draggable]="true"
+            [canAutoResize]="true">
+          </ngx-datatable-column>
+          <ngx-datatable-column 
+            name="{{ 'Last update' | translate}}" 
+            prop="updated_at"
+            [resizeable]="true"
+            [sortable]="true"
+            [draggable]="true"
+            [canAutoResize]="true">
+          </ngx-datatable-column>
+
+          <ngx-datatable-column            
+             [width]="30"
+          >
+
+                <ng-template  let-row="row" ngx-datatable-cell-template>
+                        <div class = "button-bar">
+                                <button class="btn btn-primary btn-sm" (click)="onEditExercise(row)">
+                                    <span class="fa  fa-edit" ></span>
+                                </button>
+                                <button class="btn btn-danger btn-sm" (click)="onDeleteExercise(row)"   >
+                                    <span class="fa fa-trash"></span>
+                                </button>
+                              </div>
+                </ng-template>
+          </ngx-datatable-column>
+
+      
+      </ngx-datatable>
+    </div>
+
+
+    <!--
+  <div class="card-body table-responsive">
+      <table class="table table-hover table-striped">
+          <thead>
+          <tr>
+              <th>{{'Description' | translate }}</th>
+              <th>{{ 'Language' | translate }}</th>
+              <th>{{ 'Username' | translate }}</th>
+              <th>{{ 'Created at' | translate }}</th>
+              <th> {{ 'Last update' | translate }}</th>
+              <th></th>
+
+          </tr>
+          </thead>
+          <tbody>
+              
+            <tr *ngFor="let exercise of (exerciseState | async).exercises; let i = index">
+
+                <td>{{exercise.description}}</td>
+                <td>{{exercise.language}}</td>
+                <td>{{exercise.username}}</td>
+                <td>{{stringAsDate(exercise.created_at) | date:'dd/MM/yyyy HH:mm:ss'}}</td>
+                <td>{{stringAsDate(exercise.updated_at) | date:'dd/MM/yyyy HH:mm:ss'}}</td>
+                <td>
+                  <div class = "button-bar">
+                    <button class="btn btn-primary btn-sm" (click)="onEditExercise(exercise)" >
+                        <span class="fa  fa-edit" ></span>
+                    </button>
+                    <button class="btn btn-danger btn-sm" (click)="onDeleteExercise(exercise)"  >
+                        <span class="fa fa-trash"></span>
+                    </button>
+                  </div>
+                </td>
+            </tr>
+          </tbody>
+      </table>
+  </div>
+    -->
+</div>

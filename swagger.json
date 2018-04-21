@@ -1,0 +1,89 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "version": "1.0.0",
+        "title": "Mirror Effect"
+    },
+    "host": "localhost:3000",
+    "schemes": [
+        "http"
+    ],
+    "basePath": "/api/v1",
+    "produces": [
+        "application/json"
+    ],
+    "paths": {
+        "/patients": {
+            "get": {
+                "description": "Gets `Patients` objects.\nOptional query param of **size** determines\nsize of returned array\n",
+                "parameters": [
+                    {
+                        "name": "size",
+                        "in": "query",
+                        "description": "Size of array",
+                        "required": true,
+                        "type": "number",
+                        "format": "double"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "schema": {
+                            "title": "ArrayOfPersons",
+                            "type": "array",
+                            "items": {
+                                "title": "Person",
+                                "type": "object",
+                                "properties": {
+                                    "name": {
+                                        "type": "string"
+                                    },
+                                    "single": {
+                                        "type": "boolean"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/therapists": {
+            "get": {
+                "description": "Gets `Therapist` objects\nOptional query param of **size** determines\nsize of returned array.\n",
+                "parameters": [
+                    {
+                        "name": "size",
+                        "in": "query",
+                        "description": "Size of array",
+                        "required": true,
+                        "type": "number",
+                        "format": "double"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "schema": {
+                            "title": "ArrayOfPersons",
+                            "type": "array",
+                            "items": {
+                                "title": "Person",
+                                "type": "object",
+                                "properties": {
+                                    "name": {
+                                        "type": "string"
+                                    },
+                                    "single": {
+                                        "type": "boolea"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

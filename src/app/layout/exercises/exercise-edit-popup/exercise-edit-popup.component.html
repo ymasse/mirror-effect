@@ -1,0 +1,26 @@
+
+<div class="modal-header">
+  <h5 class="modal-title" *ngIf="!editMode">{{ 'Add new exercise' | translate}}</h5>
+  <h5 class="modal-title" *ngIf="editMode">{{ 'Edit exercise' | translate}}</h5>
+  <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('No')">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<form [formGroup]="exerciseForm" class="exercise-form" (ngSubmit)="onSubmit()" novalidate>
+  <div class="modal-body">
+  <div class="row form-group validator">
+    <small for="description" class="col-form-label">{{ 'Description' | translate }}:</small>
+    <textarea class="form-control validator" id="description" formControlName="description"></textarea>
+  </div>  
+  <div class="row form-group validator">
+      <small class="center-block">{{ 'Language' | translate }}</small>
+      <select class="form-control" formControlName="language">
+          <option *ngFor="let l of languages" [ngValue]="l">{{ l.displayName | translate }}</option>
+      </select>
+  </div>          
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" (click)="onCancel()">{{ 'Close' | translate }}</button>
+    <button type="submit" class="btn btn-success" >{{ addEditButtonLabel }}</button>
+  </div>
+</form>

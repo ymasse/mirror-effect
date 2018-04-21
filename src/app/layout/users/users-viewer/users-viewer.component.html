@@ -1,0 +1,86 @@
+<div class="row">
+    <div class="col-xl-12">
+        <div class="navbar navbar-expand-lg navbar-light">
+            <div class="collapse navbar-collapse">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <a (click)="changeDisplayMode(displayModeEnum.Card)"  class="nav-link" [class.active]="displayMode === displayModeEnum.Card">
+                            <span class="fa fa-fw fa-th-large"></span> {{'Card View' | translate}}
+                        </a>
+
+                    </li>
+                    <li class="nav-item">
+                        <a (click)="changeDisplayMode(displayModeEnum.List)" class="nav-link" [class.active]="displayMode === displayModeEnum.List">
+                            <span class="fa fa-fw fa-align-justify"></span> {{'List View' | translate}}
+                        </a>
+                    </li>     
+                </ul>
+                <div class="pull-right">
+                    <button class="btn btn-success btn-sm" [routerLink]="['/users/new']" >                
+                            <span class="fa fa-fw fa-user-plus" ></span>
+                            {{'New User' | translate }}
+                    </button>
+                </div>
+                <!--<form class="form-inline my-2 my-lg-0">
+                    <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                </form>-->
+            </div>
+            
+            <!--<cm-filter-textbox class="navbar-right"
+            (changed)="filterChanged($event)"></cm-filter-textbox>-->
+
+        </div>
+    </div>
+</div>
+
+
+
+<app-users-card (delete)="onDeleteUser($event)" (edit)="onEditUser($event)"
+    [hidden]="displayMode !== displayModeEnum.Card"></app-users-card>
+
+    
+<app-user-list (delete)="onDeleteUser($event)" (edit)="onEditUser($event)"
+[hidden]="displayMode !== displayModeEnum.List"></app-user-list>
+
+<ng-template #content let-c="close" let-d="dismiss">
+    <div class="modal-header">
+        <h4 class="modal-title">Modal title</h4>
+        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+        <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <p>One fine body&hellip;</p>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-outline-dark" >{{ 'Yes' | translate }}</button>
+        <button type="button" class="btn btn-outline-dark" >{{'No' | translate }}</button>
+    </div>
+</ng-template>
+  
+
+<!--
+<app-users-card 
+    [customers]="filteredCustomers" 
+    [hidden]="displayMode !== displayModeEnum.Card"></app-users-card>
+<cm-customers-grid 
+    [customers]="filteredCustomers" 
+    [hidden]="displayMode !== displayModeEnum.Grid"></cm-customers-grid>
+
+<cm-map *ngIf="filteredCustomers.length" 
+    [zoom]="2" 
+    [enabled]="displayMode === displayModeEnum.Map" 
+    [hidden]="displayMode !== displayModeEnum.Map">
+    <cm-map-point 
+    *ngFor="let customer of filteredCustomers" 
+    [latitude]="customer.latitude" 
+    [longitude]="customer.longitude"
+    [markerText]="'<h3>' + customer.firstName + ' ' + customer.lastName + '</a></h3>' + customer.city + ', ' + customer.state.name"></cm-map-point>
+</cm-map>
+
+<cm-pagination
+    [totalItems]="totalRecords" 
+    [pageSize]="pageSize" 
+    (pageChanged)="pageChanged($event)"></cm-pagination>
+-->

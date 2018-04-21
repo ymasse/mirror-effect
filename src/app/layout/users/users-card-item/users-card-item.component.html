@@ -1,0 +1,21 @@
+<div class="card bg-light mb-3">
+    <div class="card-header">
+        
+        <span class="mr-auto">
+            {{user.first_name | capitalize }} {{ user.last_name | capitalize }} 
+        </span>
+        
+        <div class=" pull-right">
+            <button class="btn btn-primary btn-sm" (click)="onEditUser()" >
+                <span class="fa  fa-edit" ></span>
+            </button>
+            <button class="btn btn-primary btn-sm" (click)="onDeleteUser()"  >
+                <span class="fa fa-trash"></span>
+            </button>
+        </div>
+    </div>
+    <div class="card-body">
+        <h3 class="card-title">{{user.role | translate | capitalize }}</h3>
+        <p class="card-text">{{user.email}}</p>
+    </div>
+</div> 

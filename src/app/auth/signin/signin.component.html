@@ -1,0 +1,25 @@
+<div class="login-page" [@routerTransition]>
+    <div class="row justify-content-md-center">
+        <div class="col-md-4">
+          <img src="assets/images/logo.png" width="150px" class="user-avatar" />
+          <h1>Mirror Effect</h1>
+          <!--<form role="form">-->
+          <form (ngSubmit)="onSignin(f)" #f="ngForm">
+            
+              <div class="form-content">
+                  <div class="form-group">
+                      <input type="text" id="username" name="username" ngModel class="form-control input-underline input-lg" placeholder="Username">
+                  </div>
+
+                  <div class="form-group">
+                      <input type="password" id="password" name="password" ngModel class="form-control input-underline input-lg" placeholder="Password">
+                  </div>
+              </div>
+              <!--<a class="btn rounded-btn" [routerLink]="['/dashboard']" (click)="onSignin(f)"> Log in </a>-->
+              <button class="btn rounded-btn" type="submit" [disabled]="!f.valid">Sign In</button>              
+          </form>
+      </div>
+  </div>
+</div>
+
+

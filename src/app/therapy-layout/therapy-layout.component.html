@@ -1,0 +1,17 @@
+  
+<div class="therapy-view">
+  <h1>Therapy Layout - ({{ message }})</h1>
+  <router-outlet></router-outlet>
+
+  <div class="row justify-content-md-center">
+    <div class="col-md-4">
+      <app-webcam-mirror></app-webcam-mirror>   
+    </div>
+  </div>
+  <div class="row justify-content-md-center">
+      <div class="col-md-5">
+        <p><ngb-progressbar type="success" [value]="25" [striped]="true" [animated]="true"><i>50%</i></ngb-progressbar></p>        
+      </div>
+    </div>
+    
+</div>

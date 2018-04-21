@@ -1,0 +1,88 @@
+<div >
+    <form [formGroup]="userForm" class="user-form" (ngSubmit)="onSubmit()" novalidate>
+        <div class="row form-group validator">
+            <div class="col-xl-4">
+                <small class="center-block">{{ 'Username' | translate }}</small>
+                <input class="form-control" type="text" formControlName="username" [placeholder]="'Username' | translate">
+                <div class="alert alert-danger" *ngIf="userAddFailure">{{'This username already exist' | translate}}</div>
+
+                
+            </div>
+        </div>   
+        <div class="row form-group validator" *ngIf="!editMode">
+            <div class="col-xl-4">
+                <small class="center-block">{{ 'Password' | translate }}</small>
+                <input type="password" class="form-control" id="inputPassword" [placeholder]="'Password' | translate" formControlName="password">   
+                
+            </div>
+        </div>   
+        <div class="row form-group validator" *ngIf="!editMode">
+            <div class="col-xl-4">
+                <small class="center-block">{{ 'Validate password' | translate }}</small>
+                <input type="password" class="form-control" id="passwordValidation" [placeholder]="'Password' | translate" formControlName="validatePassword">   
+                <div class="alert alert-danger" *ngIf="showPasswordMatchError()">{{ 'Please enter the same password' | translate}}</div>
+            </div>
+        </div> 
+        <div class="row form-group validator">
+            <div class="col-xl-4">
+                <small class="center-block">{{ 'First Name' | translate }} </small>
+                <input class="form-control validator" type="text" formControlName="first_name">
+               
+            </div>
+        </div>
+        <div class="row form-group validator">
+            <div class="col-xl-4">
+                <small class="center-block">{{ 'Last Name' | translate }}</small>
+                    <input class="form-control" type="text" formControlName="last_name">
+                
+            </div>
+        </div>      
+        <div class="row form-group validator">
+            <div class="col-xl-4">
+                <small class="center-block">{{ 'Email' | translate }}</small>
+                    <input class="form-control" type="email" formControlName="email">
+                
+            </div>
+        </div>    
+        <div class="row form-group">
+                <div class="col-xl-4">
+                    <small class="center-block">{{ 'Language' | translate }}</small>
+                    <select class="form-control" formControlName="language">
+                        <option *ngFor="let l of languages" [ngValue]="l">{{ l.displayName | translate }}</option>
+                    </select>
+                </div>
+            </div>
+        
+        
+        <div class="row form-group">
+            <div class="col-xl-4">
+                <small class="center-block">{{ 'Role' | translate }}</small>
+                <select class="form-control" formControlName="role">
+                    <option *ngFor="let r of roles" [ngValue]="r">{{ r | translate }}</option>
+                </select>
+            </div>
+        </div>
+        <div class="row form-group">
+            <div class="col-xl-4">
+                <label class="center-block">{{ 'Admin' | translate }}</label>
+                <div class="btn-group btn-group-toggle" ngbRadioGroup name="radioBasic" formControlName="isAdmin">
+                    <label ngbButtonLabel class="btn-primary">
+                        <input ngbButton type="radio" [value]=true> Yes
+                    </label>
+                    <label ngbButtonLabel class="btn-primary">
+                        <input ngbButton type="radio" [value]=false> No
+                    </label>
+                </div>
+            </div>
+        </div>  
+        
+        <div >
+            <div class="pull-right">
+                <button class="btn btn-default" (click)="onCancel()">{{ 'Cancel' | translate }}</button>&nbsp;&nbsp;
+                <button type="submit" class="btn btn-success" [disabled]="userForm.invalid">{{ submitButtonLabel | translate }}</button>
+            </div>
+        </div>
+    </form>
+
+</div>
+  

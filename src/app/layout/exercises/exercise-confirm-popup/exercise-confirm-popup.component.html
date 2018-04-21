@@ -1,0 +1,13 @@
+<div class="modal-header">
+    <h4 class="modal-title">{{ 'Confirmation Required' | translate }}</h4>
+    <button type="button" class="close" aria-label="Close" (click)="onNo()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <p>{{'Are you sure to delete the exercise' | translate }}?</p>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="onYes()">{{ 'Yes' | translate}}</button>
+    <button type="button" class="btn btn-outline-dark" (click)="onNo()">{{ 'No' | translate }}</button>
+  </div>

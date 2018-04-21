@@ -1,0 +1,21 @@
+
+$topnav-background-color: #222;
+.therapy-view {
+  background-color: $topnav-background-color;
+  //color: #fff;
+  color: #999;  
+  height:1200px;
+}
+.webcam-box {
+  width: 100%;
+  border: 5px solid #E18728;
+  box-sizing: content-box;
+}
+
+.webcam-control {
+  width: 90%;
+  padding: 20%;
+  border: 4px solid black;
+  margin: .5em auto;
+  box-sizing: content-box;
+}

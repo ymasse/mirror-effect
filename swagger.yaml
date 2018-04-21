@@ -1,0 +1,120 @@
+# Example YAML to get you started quickly.
+# Be aware that YAML has indentation based scoping.
+# Code completion support is available so start typing for available options.
+swagger: '2.0'
+# This is your document metadata
+info:
+  version: "1.0.0"
+  title: Mirror Effect
+  description: Move your app forward with the Uber API
+# the domain of the service
+host: localhost:3000
+# array of all schemes that your API supports
+schemes:
+  - http
+# will be prefixed to all paths
+basePath: /api/v1
+produces:
+  - application/json
+
+# Describe your paths here
+paths:
+  # This is a path endpoint. Change it.
+  /patients:
+    # This is a HTTP operation
+    get:
+      # Describe this verb here. Note: you can use markdown
+      description: |
+        Gets `Patients` objects.
+        Optional query param of **size** determines
+        size of returned array
+      # This is array of GET operation parameters:
+      parameters:
+        # An example parameter that is in query and is required
+        -
+          name: size
+          in: query
+          description: Size of array
+          required: true
+          type: number
+          format: double
+      # Expected responses for this operation:
+      responses:
+        # Response code
+        200:
+          description: Successful response
+          # A schema describing your response object.
+          # Use JSON Schema format
+          schema:
+            title: ArrayOfPersons
+            type: array
+            items:
+              title: Person
+              type: object
+              properties:
+                name:
+                  type: string
+                single:
+                  type: boolean
+  /therapists:
+    get:
+      description: |
+        Gets `Therapist` objects
+        Optional query param of **size** determines
+        size of returned array.
+      parameters:
+        # An example parameter that is in query and is required
+        -
+          name: size
+          in: query
+          description: Size of array
+          required: true
+          type: number
+          format: double
+      responses:
+        # Response code
+        200:
+          description: Successful response
+          # A schema describing your response object.
+          # Use JSON Schema format
+          schema:
+            title: ArrayOfPersons
+            type: array
+            items:
+              title: Person
+              type: object
+              properties:
+                name:
+                  type: string
+                single:
+                  type: boolea
+definitions:
+ Patient:
+    type: object
+    properties:
+      username:
+        type: string
+        description: Unique username used for authentication on the server.
+      first_name:
+        type: string
+        description: First name of the patient
+      last_name:
+        type: string
+        description: Last name of the patient
+      paralyzed_side:
+        type: string
+        description: Indicates which side of the face of the patient is paralyzed.
+        enum: [right, left]
+  therapist:
+      description:
+        type: string
+        description: Description of product.
+      display_name:
+        type: string
+        description: Display name of product.
+      capacity:
+        type: string
+        description: Capacity of product. For example, 4 people.
+      image:
+        type: string
+        description: Image URL representing the product. 

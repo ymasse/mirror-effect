@@ -1,0 +1,17 @@
+<div class = "row">
+    <div class="col-xl-12">
+        <div class="pull-right">
+                <button class="btn btn-secondary btn-sm" (click)="onRefresh()">
+                
+                <span class="fa fa-retweet" ></span>
+                {{ 'Refresh' | translate }}
+            </button>
+            <button class="btn btn-success btn-sm" [routerLink]="['/therapies/new']">
+                
+                <span class="fa fa-fw fa-plus" ></span>
+                {{ 'Add new therapy' | translate }}
+            </button>
+        </div>
+    </div>
+</div>
+<app-therapy-list (delete)="onDeleteTherapy($event)" (edit)="onEditTherapy($event)"></app-therapy-list>
