@@ -40,3 +40,10 @@ testem.log
 # System Files
 .DS_Store
 Thumbs.db
+
+#config files
+/config/dev.json
+/config/test.json
+/config/default.json
+
+
