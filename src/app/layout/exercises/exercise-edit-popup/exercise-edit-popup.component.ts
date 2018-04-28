@@ -17,7 +17,7 @@ export class ExerciseEditPopupComponent implements OnInit {
 
   //exercise: Exercise = null;
   exerciseForm: FormGroup;
-  private addEditButtonLabel: string = "Add";
+  addEditButtonLabel: string = "Add";
 
   languages=  [
     { code:'fr', displayName:'French'},

@@ -15,9 +15,9 @@ export class WebfeedComponent implements OnInit, OnDestroy {
 
   readonly ELLIPSE_BORDER_COLOR: string = "#8c8c8c";
   readonly FACE_SEPARATOR_COLOR: string = "#595959";
-  readonly ELLIPSE_XRADIUS = 320;
-  readonly ELLIPSE_YRADIUS = 400;
-  readonly ELLIPSE_YOFFSET = 40;
+  ELLIPSE_XRADIUS = 320;
+  ELLIPSE_YRADIUS = 400;
+  ELLIPSE_YOFFSET = 0;
   videoStream: any= null;
 
 
@@ -47,20 +47,33 @@ export class WebfeedComponent implements OnInit, OnDestroy {
     backbuffer.style.display = 'none';
     //display.style.display = 'none';
 
-     feed.width = 1920;
-     feed.height = 1080;
+    let canvasWidth = window.innerWidth;
+    let canvasHeight = window.innerHeight;
+    //let canvasWidth = 640;
+    //let canvasHeight = 480;
+    feed.width = canvasWidth;
+    feed.height = canvasHeight;
 
-     backbuffer.width = 1920;
-     backbuffer.height = 1080;
+    backbuffer.width = canvasWidth;
+    backbuffer.height = canvasHeight;
 
-    display.width = 1920;
-    display.height = 1080;
+    display.width = canvasWidth;
+    display.height = canvasHeight;
 
-    backgroundLayer.width = 1920;
-    backgroundLayer.height = 1080;
+    // if (window.innerHeight < ((this.ELLIPSE_YRADIUS*2)+20)) {
+    //   this.ELLIPSE_YRADIUS = (window.innerHeight/2) -10;
+    //   this.ELLIPSE_YOFFSET = 0;
+    // }
+
+    this.ELLIPSE_YOFFSET = 0;
+    this.ELLIPSE_XRADIUS = canvasWidth * 0.19;
+    this.ELLIPSE_YRADIUS = canvasHeight * 0.42;
+
+    backgroundLayer.width = window.innerWidth;
+    backgroundLayer.height = canvasHeight;
 
     n.getUserMedia = ( n.getUserMedia || n.webkitGetUserMedia || n.mozGetUserMedia  || n.msGetUserMedia );
-
+    
     n.mediaDevices.getUserMedia({ video: true }).then(this.onSuccess.bind(this));    
   }
 
@@ -136,7 +149,7 @@ export class WebfeedComponent implements OnInit, OnDestroy {
     ctx.drawImage(video, 0, 0, video.videoWidth, video.videoHeight, 0, 0, ctx.canvas.width, ctx.canvas.height);
     ctx.restore();
     
-    ctx.filter = 'brightness(25%)';
+    ctx.filter = 'brightness(12%)';
   }
 
   /**
@@ -163,7 +176,7 @@ export class WebfeedComponent implements OnInit, OnDestroy {
   }
 
     /**
-   * Render the half duplicate face in the middle of the screen.  The left side of the face is duplicate.
+   * Render  the half duplicate face in the middle of the screen.  The left side of the face is duplicate.
    */
   renderForegroundWithLeftDuplicate(video, ctx){
     
@@ -199,8 +212,8 @@ export class WebfeedComponent implements OnInit, OnDestroy {
     ctx.beginPath();
     ctx.lineWidth=2;
     ctx.strokeStyle="ELLIPSE_BORDER_COLOR";
-    ctx.moveTo(ctx.canvas.width/2,100);
-    ctx.lineTo(ctx.canvas.width/2,ctx.canvas.height-180);
+    ctx.moveTo(ctx.canvas.width/2,(ctx.canvas.height/2)-this.ELLIPSE_YRADIUS);
+    ctx.lineTo(ctx.canvas.width/2,(ctx.canvas.height/2) + this.ELLIPSE_YRADIUS);
     ctx.setLineDash([5, 10]);
     ctx.stroke();
     ctx.beginPath();

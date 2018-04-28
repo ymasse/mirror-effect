@@ -68,7 +68,7 @@
     "Edit exercise": "Edit exercise",
     "Manage Therapies": "Manage Therapies",
     "Refresh": "Refresh",
-    "Add new therapy": "Add new therapy",
+    "Add new therapy": "Ajoutez une thérapie",
     "Start": "Start",
     "End": "End",
     "Last Session": "Last Session",
@@ -79,6 +79,12 @@
     "Left": "Left",
     "Quit": "Quit",
     "Paralyzed Side": "Paralyzed side",
-    "Notes": "Notes"
+    "Notes": "Notes",
+    "Movement Duration": "Movement duration",
+    "Movement Repetition": "Movement repetition",
+    "Delay between repetition": "Delay between repetition",
+    "Daily Repetition": "Daily Repetition",
+    "Starting date": "Starting date"
+
 
 }

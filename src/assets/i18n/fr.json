@@ -79,7 +79,12 @@
     "Left": "Gauche",
     "Quit": "Quitter",
     "Paralyzed Side": "Côté paralysé",
-    "Notes": "Notes"
+    "Notes": "Notes",
+    "Movement Duration": "Durée du mouvement",
+    "Movement Repetition": "Nombre de répétitions",
+    "Delay between repetition": "Durée de la pause",
+    "Daily Repetition": "Nombre de séances quotidiennes",
+    "Starting date": "Début de la thérapie"
 
     
 

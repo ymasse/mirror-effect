@@ -1,8 +1,25 @@
 <div class="login-page" [@routerTransition]>
     <div class="row justify-content-md-center">
         <div class="col-md-4">
-          <img src="assets/images/logo.png" width="150px" class="user-avatar" />
-          <h1>Mirror Effect</h1>
+           <div class="row">
+                <div class="col-md-4"></div>
+                <div class="col-md-4">
+                    <img src="assets/images/logo.png" width="150px" class="user-avatar" />
+                </div>
+                <div class="col-md-4"></div>
+          </div>
+          <div class="row">
+                <div class="col-md-3"></div>
+                <div class="col-md-6">
+                        <h1 style="text-align: center;">Miroir Facial</h1>
+                </div>
+                <div class="col-md-3"></div>              
+            
+          </div>
+          <div class="row">
+             
+            
+          </div>
           <!--<form role="form">-->
           <form (ngSubmit)="onSignin(f)" #f="ngForm">
             
@@ -16,7 +33,7 @@
                   </div>
               </div>
               <!--<a class="btn rounded-btn" [routerLink]="['/dashboard']" (click)="onSignin(f)"> Log in </a>-->
-              <button class="btn rounded-btn" type="submit" [disabled]="!f.valid">Sign In</button>              
+              <button class="btn rounded-btn btn-success" type="submit" [disabled]="!f.valid">Connectez-vous</button>              
           </form>
       </div>
   </div>
