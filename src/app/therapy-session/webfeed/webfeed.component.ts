@@ -19,12 +19,14 @@ export class WebfeedComponent implements OnInit, OnDestroy {
   ELLIPSE_YRADIUS = 400;
   ELLIPSE_YOFFSET = 0;
   videoStream: any= null;
-
+  isFirefox: boolean=false;
 
   constructor() { }
 
   ngOnInit() {
     this.videoStart();
+
+    this.isFirefox = navigator.userAgent.toLowerCase().indexOf('firefox') > -1;
   }
 
   ngOnDestroy() {
@@ -60,16 +62,11 @@ export class WebfeedComponent implements OnInit, OnDestroy {
     display.width = canvasWidth;
     display.height = canvasHeight;
 
-    // if (window.innerHeight < ((this.ELLIPSE_YRADIUS*2)+20)) {
-    //   this.ELLIPSE_YRADIUS = (window.innerHeight/2) -10;
-    //   this.ELLIPSE_YOFFSET = 0;
-    // }
-
     this.ELLIPSE_YOFFSET = 0;
     this.ELLIPSE_XRADIUS = canvasWidth * 0.19;
     this.ELLIPSE_YRADIUS = canvasHeight * 0.42;
 
-    backgroundLayer.width = window.innerWidth;
+    backgroundLayer.width = canvasWidth;
     backgroundLayer.height = canvasHeight;
 
     n.getUserMedia = ( n.getUserMedia || n.webkitGetUserMedia || n.mozGetUserMedia  || n.msGetUserMedia );
@@ -114,30 +111,6 @@ export class WebfeedComponent implements OnInit, OnDestroy {
     // Copy back the image in the main display canvas.
     imageData = feedContext.getImageData(0, 0, display.width, display.height);
     displayContext.putImageData(imageData, 0, 0);    
-  }
-
-  /**
-   * Render the background of the display.
-   */
-  renderBackgroundWithRigthDuplicate(video, ctx){
-
-    // DrawBackground
-    ctx.save();
-    // Multiply the y value by -1 to flip vertically
-    ctx.scale(-1, 1);
-
-  // Start at (0, -height), which is now the bottom-left corner
-    //feedContext.drawImage(video, 0, 0, video.videoWidth, video.videoHeight, -display.width, display.height, display.width, display.height);
-    ctx.translate(-ctx.canvas.width, 0);
-    // This print the left side of image inverted on the right side.
-    ctx.drawImage(video, 0, 0, video.videoWidth/2, video.videoHeight, 0, 0, ctx.canvas.width/2, ctx.canvas.height);
-    //feedContext.drawImage(video, 0, 0, video.videoWidth/2, video.videoHeight, 0, 0, display.width/2, display.height)
-    ctx.restore();
-
-    // This print the left side of the image, on the left side like in the original image.
-    ctx.drawImage(video, 0, 0, video.videoWidth/2, video.videoHeight, 0, 0, ctx.canvas.width/2, ctx.canvas.height);
-    
-    ctx.filter = 'brightness(25%)';
   }
 
   renderBackgroundNoDuplicate(video, ctx) {
@@ -205,8 +178,13 @@ export class WebfeedComponent implements OnInit, OnDestroy {
    * that only the pixels inside the ellipse will be copied. 
    */
   renderFaceEllipse(video, ctx) {
-    ctx.ellipse(ctx.canvas.width/2,(ctx.canvas.height/2)-this.ELLIPSE_YOFFSET, this.ELLIPSE_XRADIUS, this.ELLIPSE_YRADIUS, 0, 0, 2*Math.PI);
-    ctx.clip();
+
+    // Extremely poor performance are observed in Firefox when using clip().  The lag is constantly increasing which is not acceptable
+    // for this application.  Hence, in firefox, we will just not fade the bakcground.
+    if (!this.isFirefox) {
+      ctx.ellipse(ctx.canvas.width/2,(ctx.canvas.height/2)-this.ELLIPSE_YOFFSET, this.ELLIPSE_XRADIUS, this.ELLIPSE_YRADIUS, 0, 0, 2*Math.PI);    
+      ctx.clip();
+    }
 
     //feedContext.globalAlpha = 0.8;
     ctx.beginPath();
